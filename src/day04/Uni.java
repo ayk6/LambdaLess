@@ -51,4 +51,14 @@ public class Uni {
 
     public Uni() {
     }
+
+    @Override
+    public String toString() {
+        return "Uni{" +
+                "uni='" + uni + '\'' +
+                ", department='" + department + '\'' +
+                ", students=" + students +
+                ", avGrade=" + avGrade +
+                "}\n";
+    }
 }
