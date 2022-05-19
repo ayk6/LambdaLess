@@ -20,7 +20,12 @@ public class UniMain2 {
 
         System.out.println(studCount(unv)); // false
         isThereMath(unv);
-        studSort(unv);
+        studSort(unv); // collect stream olan elemanları toplar
+            // daha sonra list vb. atanabilir
+        SecondLeastStudent(unv);
+        collStuNums(unv); // map yerine mapToInt kullanılırsa doğrudan int
+                // değerler akışa gelir ve doğrudan sum kullanılabilir
+        maxGrade(unv);
     }
     public static boolean studCount (List <Uni> unv){
         return unv.stream().allMatch(t->t.getStudents()<100);
@@ -36,5 +41,18 @@ public class UniMain2 {
         System.out.println(unv.stream().sorted(Comparator.comparing
                 (Uni::getStudents).reversed()).
                 collect(Collectors.toList()));
+    }
+    public static void SecondLeastStudent(List<Uni> unv){
+        System.out.println(unv.stream().sorted(Comparator.comparing(Uni::getStudents)).
+                limit(2).skip(1).collect(Collectors.toList()));
+    }
+    public static void collStuNums(List<Uni> unv){
+        System.out.println(unv.stream().map(Uni::getStudents).
+                // reduce(Integer::sum));
+                // reduce(Math::addExact));
+                      reduce(0, (x, y) -> x + y));
+    }
+    public static void maxGrade(List<Uni> unv){
+        System.out.println(unv.stream().mapToInt(Uni::getAvGrade).max());
     }
 }
